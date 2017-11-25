@@ -10,7 +10,7 @@ body {
     background-size: 30%;
 }
 
-.gemPic {
-	width: 25%;
-	height: auto;
+button {
+  width: 100px;
+  height: 50px;
 }
