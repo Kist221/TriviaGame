@@ -46,8 +46,8 @@ var startGame = function ()
 	$("#start").on("click", function()
 	{
 		reset();
-		popQuestion();
 		$("#start").hide();
+		popQuestion();
 		answering();
 	})
 };
@@ -107,9 +107,8 @@ var answering = function ()
 
 
 
+
+
 startGame();
-
-
-
 
 
