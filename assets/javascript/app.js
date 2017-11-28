@@ -45,7 +45,7 @@ var startGame = function ()
 	{
 		// confirm new game variables
 		if (current === 0 && remaining === questions.length) {
-			$("#info, #questions").empty();
+			$("#info").empty();
 			$("#start").hide();
 			nextQuestion();
 			answering();
@@ -53,6 +53,10 @@ var startGame = function ()
 		// reset variables if incorrect
 		else {
 			reset();
+			$("#info").empty();
+			$("#start").hide();
+			nextQuestion();
+			answering();
 		}
 	})
 };
@@ -83,8 +87,20 @@ var nextQuestion = function ()
 	$("#questions").empty();
 	// check if more questions
 	if (remaining > 0) {
-		// populate next question
-		popQuestion();
+		// list questions on page
+		$("#questions").append("<h2>" + questions[current].q + "</h2>");
+		// loop length of answer options
+		for (var j = 0; j < questions[current].a.length; j++)
+		{
+			// make var with answers
+			var answer = $("<button>" + questions[current].a[j].a + "</button>");
+			// add class for referencing click functions
+			answer.addClass("answer");
+			// store data whether answer is T or F
+			answer.attr("data", questions[current].a[j].correct);
+			// list answers on page
+			$("#questions").append(answer);
+		}
 	}
 	// if no more questions display info
 	else {
@@ -116,14 +132,13 @@ var answering = function ()
 		if ($(this).attr("data") === "true") {
 			// store correct input 
 			correct++;
-			trackQuestion();
 		}
 		// if answer is incorrect
 		else {
 			// store incorrect input
 			incorrect++;
-			trackQuestion();
 		}
+		trackQuestion();
 		// NEXT QUESTION
 		nextQuestion();
 	})
@@ -134,10 +149,10 @@ var popInfo = function ()
 {
 	// show start button
 	$("#start").show();
+	// make stat var
+	var stats = "<h2>Your Results</h2>"+"<p>Correct: " + correct + "</p>"+"<p>Incorrect: " + incorrect + "</p>"
 	// list results on page
-	$("#info").append("<h2>Your Results</h2>");
-	$("#info").append("<p>Correct: " + correct + "</p>");
-	$("#info").append("<p>Incorrect: " + incorrect + "</p>");
+	$("#info").html(stats);
 };
 
 
