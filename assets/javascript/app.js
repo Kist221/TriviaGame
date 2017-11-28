@@ -3,35 +3,33 @@
 var questions = [
 {
   q: "first question",
-  a: [{a: "true", correct: true}, {a: "false", correct: false}]
+  a: [{a: "1true", correct: true}, {a: "1false", correct: false}]
 },
 {
   q: "second question",
-  a: [{a: "true", correct: true}, {a: "false", correct: false}]
+  a: [{a: "2true", correct: true}, {a: "2false", correct: false}]
 },
 {
   q: "third question",
-  a: [{a: "true", correct: true}, {a: "false", correct: false}]
+  a: [{a: "3true", correct: true}, {a: "3false", correct: false}]
 }
 ];
-
 // correct answers
-var correct = 0;
-
+var correct;
 // incorrect answers
-var incorrect = 0;
-
+var incorrect;
 // which question you are on
-var current = 0;
-
+var current;
 // number of questions skipped or missed
-var remaining = questions.length;
+var remaining;
 
-
+// SHOW ALL CURRENT DATA
+var allData = function ()
+{
+	console.log("correct: "+correct, "incorrect: "+incorrect, "current: "+current, "remaining: "+remaining, "questions: "+questions);
+};
 
 // game functions
-
-// reset variables
 var reset = function ()
 {
 	correct = 0;
@@ -43,12 +41,19 @@ var reset = function ()
 // starts game when player clicks start
 var startGame = function ()
 {
-	$("#start").on("click", function()
+	$("#gameScene").on("click", "#start", function ()
 	{
-		reset();
-		$("#start").hide();
-		popQuestion();
-		answering();
+		// confirm new game variables
+		if (current === 0 && remaining === questions.length) {
+			$("#info, #questions").empty();
+			$("#start").hide();
+			nextQuestion();
+			answering();
+		}
+		// reset variables if incorrect
+		else {
+			reset();
+		}
 	})
 };
 
@@ -69,10 +74,6 @@ var popQuestion = function ()
 		// list answers on page
 		$("#questions").append(answer);
 	}
-	// change current question value
-	current++;
-	// update remaining questions
-	remaining--;
 };
 
 // populate next question
@@ -80,8 +81,29 @@ var nextQuestion = function ()
 {
 	// clear question container for next question
 	$("#questions").empty();
-	// populate next question
-	popQuestion();
+	// check if more questions
+	if (remaining > 0) {
+		// populate next question
+		popQuestion();
+	}
+	// if no more questions display info
+	else {
+		// show info
+		popInfo();
+	}
+};
+
+// update questions
+var trackQuestion = function ()
+{
+	// change current question value
+	console.log("current: "+current);
+	++current;
+	console.log("current: "+current);
+	// update remaining questions
+	console.log("remaining: "+remaining);
+	--remaining;
+	console.log("remaining: "+remaining);
 };
 
 // function for determining correct answer and displaying next question
@@ -94,19 +116,29 @@ var answering = function ()
 		if ($(this).attr("data") === "true") {
 			// store correct input 
 			correct++;
+			trackQuestion();
 		}
 		// if answer is incorrect
 		else {
 			// store incorrect input
 			incorrect++;
+			trackQuestion();
 		}
 		// NEXT QUESTION
 		nextQuestion();
 	})
 };
 
-
-
+// display info upon completion
+var popInfo = function ()
+{
+	// show start button
+	$("#start").show();
+	// list results on page
+	$("#info").append("<h2>Your Results</h2>");
+	$("#info").append("<p>Correct: " + correct + "</p>");
+	$("#info").append("<p>Incorrect: " + incorrect + "</p>");
+};
 
 
 startGame();
