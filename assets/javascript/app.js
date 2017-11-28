@@ -51,7 +51,7 @@ var startGame = function ()
 			answering();
 		}
 		// reset variables if incorrect
-		else {
+		else if (current !== 0 && remaining !== questions.length) {
 			reset();
 			$("#info").empty();
 			$("#start").hide();
@@ -62,23 +62,23 @@ var startGame = function ()
 };
 
 // populates questions one at a time with answers and data values
-var popQuestion = function ()
-{
-	// list questions on page
-	$("#questions").append("<h2>" + questions[current].q + "</h2>");
-	// loop length of answer options
-	for (var j = 0; j < questions[current].a.length; j++)
-	{
-		// make var with answers
-		var answer = $("<button>" + questions[current].a[j].a + "</button>");
-		// add class for referencing click functions
-		answer.addClass("answer");
-		// store data whether answer is T or F
-		answer.attr("data", questions[current].a[j].correct);
-		// list answers on page
-		$("#questions").append(answer);
-	}
-};
+// var popQuestion = function ()
+// {
+// 	// list questions on page
+// 	$("#questions").append("<h2>" + questions[current].q + "</h2>");
+// 	// loop length of answer options
+// 	for (var j = 0; j < questions[current].a.length; j++)
+// 	{
+// 		// make var with answers
+// 		var answer = $("<button>" + questions[current].a[j].a + "</button>");
+// 		// add class for referencing click functions
+// 		answer.addClass("answer");
+// 		// store data whether answer is T or F
+// 		answer.attr("data", questions[current].a[j].correct);
+// 		// list answers on page
+// 		$("#questions").append(answer);
+// 	}
+// };
 
 // populate next question
 var nextQuestion = function ()
@@ -131,12 +131,12 @@ var answering = function ()
 		// if answer is correct
 		if ($(this).attr("data") === "true") {
 			// store correct input 
-			correct++;
+			++correct;
 		}
 		// if answer is incorrect
 		else {
 			// store incorrect input
-			incorrect++;
+			++incorrect;
 		}
 		trackQuestion();
 		// NEXT QUESTION
