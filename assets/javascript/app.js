@@ -43,16 +43,10 @@ var startGame = function ()
 {
 	$("#gameScene").on("click", "#start", function ()
 	{
+		// reset stats
+		reset();
 		// confirm new game variables
 		if (current === 0 && remaining === questions.length) {
-			$("#info").empty();
-			$("#start").hide();
-			nextQuestion();
-			answering();
-		}
-		// reset variables if incorrect
-		else if (current !== 0 && remaining !== questions.length) {
-			reset();
 			$("#info").empty();
 			$("#start").hide();
 			nextQuestion();
