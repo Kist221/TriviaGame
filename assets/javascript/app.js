@@ -31,19 +31,20 @@ var allData = function (){
 };
 
 // game functions
-var reset = function ()
-{
+var reset = function (){
 	correct = 0;
 	incorrect = 0;
 	current = 0;
 	remaining = questions.length;
+	shuffle(questions);
+	for (var i = 0; i < questions.length; i++) {
+		shuffle(questions[i].a);
+	}
 };
 
 // starts game when player clicks start
-var startGame = function ()
-{
-	$("#gameScene").on("click", "#start", function ()
-	{
+var startGame = function (){
+	$("#gameScene").on("click", "#start", function (){
 		// reset stats
 		reset();
 		// confirm new game variables
@@ -76,8 +77,7 @@ var startGame = function ()
 };
 
 // populate next question
-var nextQuestion = function ()
-{
+var nextQuestion = function (){
 	// clear question container for next question
 	$("#questions").empty();
 	// check if more questions
@@ -85,8 +85,7 @@ var nextQuestion = function ()
 		// list questions on page
 		$("#questions").append("<h2>" + questions[current].q + "</h2>");
 		// loop length of answer options
-		for (var j = 0; j < questions[current].a.length; j++)
-		{
+		for (var j = 0; j < questions[current].a.length; j++){
 			// make var with answers
 			var answer = $("<button>" + questions[current].a[j].a + "</button>");
 			// add class for referencing click functions
@@ -105,8 +104,7 @@ var nextQuestion = function ()
 };
 
 // update questions
-var trackQuestion = function ()
-{
+var trackQuestion = function (){
 	// change current question value
 	console.log("current: "+current);
 	++current;
@@ -118,8 +116,7 @@ var trackQuestion = function ()
 };
 
 // display info upon completion
-var popInfo = function ()
-{
+var popInfo = function (){
 	// show start button
 	$("#start").show();
 	// make stat var
@@ -127,6 +124,22 @@ var popInfo = function ()
 	// list results on page
 	$("#info").html(stats);
 };
+
+// Function for shuffling questions and answers ordering between games
+function shuffle(arr){
+  var m = arr.length, t, i;
+  // While there remain elements to shuffle…
+  while (m) {
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * m--);
+    // And swap it with the current element.
+    t = arr[m];
+    arr[m] = arr[i];
+    arr[i] = t;
+  }
+  return arr;
+}
+
 
 
 startGame();
