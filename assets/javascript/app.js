@@ -1,14 +1,20 @@
 
 // Game Variables
 var questions = [{
-	  q: "first question",
-	  a: [{a: "1true", correct: true}, {a: "1false", correct: false}]
+	  q: "Who was the legendary Benedictine monk who invented champagne?",
+	  a: [{a: "Dom Perignon", correct: true}, {a: "Walker Percy", correct: false}, {a: "Basil Hume", correct: false}, {a: "Donald Trump", correct: false}]
 	},{
-	  q: "second question",
-	  a: [{a: "2true", correct: true}, {a: "2false", correct: false}]
+	  q: "Name the largest freshwater lake in the world?",
+	  a: [{a: "Lake Michigan-Huron", correct: false}, {a: "Lake Victoria", correct: false}, {a: "The Caspian Sea", correct: false}, {a: "Lake Superior", correct: true}]
 	},{
-	  q: "third question",
-	  a: [{a: "3true", correct: true}, {a: "3false", correct: false}]
+	  q: "The molecule 'hemoglobin' is used in which type of cells?",
+	  a: [{a: "Red Blood Cells", correct: true}, {a: "White Blood Cells", correct: false}, {a: "Platelets", correct: false}, {a: "Plasma", correct: false}]
+	},{
+	  q: "Bruce Banner turns into what fictional superhero when he becomes angry?",
+	  a: [{a: "A Woman", correct: false}, {a: "Frankenstein's monster", correct: false}, {a: "The Hulk", correct: true}, {a: "Betty White", correct: false}]
+	},{
+	  q: "How old was American musician Jimi Hendrix when he passed away in 1970?",
+	  a: [{a: "27", correct: true}, {a: "32", correct: false}, {a: "47", correct: false}, {a: "38", correct: false}]
 }];
 // correct answers
 var correct;
@@ -84,7 +90,7 @@ var nextQuestion = function ()
 			// make var with answers
 			var answer = $("<button>" + questions[current].a[j].a + "</button>");
 			// add class for referencing click functions
-			answer.addClass("answer");
+			answer.addClass("answer m-2");
 			// store data whether answer is T or F
 			answer.attr("data", questions[current].a[j].correct);
 			// list answers on page
