@@ -11,7 +11,7 @@ var questions = [{
 	  a: [{a: "Red Blood Cells", correct: true}, {a: "White Blood Cells", correct: false}, {a: "Platelets", correct: false}, {a: "Plasma", correct: false}]
 	},{
 	  q: "Bruce Banner turns into what fictional superhero when he becomes angry?",
-	  a: [{a: "A Woman", correct: false}, {a: "Frankenstein's monster", correct: false}, {a: "The Hulk", correct: true}, {a: "Betty White", correct: false}]
+	  a: [{a: "Batman", correct: false}, {a: "Frankenstein's monster", correct: false}, {a: "The Hulk", correct: true}, {a: "Betty White", correct: false}]
 	},{
 	  q: "How old was American musician Jimi Hendrix when he passed away in 1970?",
 	  a: [{a: "27", correct: true}, {a: "32", correct: false}, {a: "47", correct: false}, {a: "38", correct: false}]
