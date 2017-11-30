@@ -15,6 +15,21 @@ var questions = [{
 	},{
 	  q: "How old was American musician Jimi Hendrix when he passed away in 1970?",
 	  a: [{a: "27", correct: true}, {a: "32", correct: false}, {a: "47", correct: false}, {a: "38", correct: false}]
+	},{
+	  q: "In the game Scrabble, what is the point value of the letter K?",
+	  a: [{a: "Two", correct: false}, {a: "Three", correct: false}, {a: "Eight", correct: false}, {a: "Five", correct: true}]
+	},{
+	  q: "186,282 miles per second is the speed of what in a vacuum?",
+	  a: [{a: "Light", correct: true}, {a: "Sound", correct: false}, {a: "Sarcasm", correct: false}, {a: "Love", correct: false}]
+	},{
+	  q: "To be legally sold as bourbon, a whiskey's mash must contain at least 51% of what grain?",
+	  a: [{a: "Musk", correct: false}, {a: "Alcohol", correct: false}, {a: "Corn", correct: true}, {a: "Wheat", correct: false}]
+	},{
+	  q: "In 1867 the United States purchased Alaska from what country?",
+	  a: [{a: "Russia", correct: true}, {a: "China", correct: false}, {a: "Japan", correct: false}, {a: "Canada", correct: false}]
+	},{
+	  q: "What is the best dad dance move?",
+	  a: [{a: "The Robot", correct: true}, {a: "The Worm", correct: true}, {a: "The Sprinkler", correct: true}, {a: "The Pogo", correct: true}]
 }];
 // correct answers
 var correct;
