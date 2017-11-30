@@ -70,12 +70,18 @@ var startGame = function (){
 			if ($(this).attr("data") === "true") {
 				// store correct input 
 				++correct;
+				// show correct image
+				$("#questions").html('<img src="assets/images/green.png">');
 			}
 			// if answer is incorrect
 			else {
 				// store incorrect input
 				++incorrect;
+				// show incorrect image
+				$("#questions").html('<img src="assets/images/red.png">');
 			}
+			// stop timer
+			endTimer();
 			// track current and remaining questions
 			trackQuestion();
 			// NEXT QUESTION
@@ -152,9 +158,12 @@ var countdown = function () {
 	seconds--;
 	// if countdown ends
 	if (seconds < 0) {
+		endTimer();
+		// show caution image
+		$("#questions").html('<img src="assets/images/yellow.png">');
 		tooSlow++;
 		trackQuestion();
-		nextQuestion();
+		setTimeout(nextQuestion, 1000);
 	}
 }
 
