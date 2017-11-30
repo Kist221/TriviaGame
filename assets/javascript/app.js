@@ -20,10 +20,16 @@ var questions = [{
 var correct;
 // incorrect answers
 var incorrect;
+// timed out answers
+var tooSlow;
 // which question you are on
 var current;
 // number of questions skipped or missed
 var remaining;
+// timer variables
+var seconds;
+var myInterval;
+var timerOn = false;
 
 // SHOW ALL CURRENT DATA
 var allData = function (){
@@ -34,6 +40,7 @@ var allData = function (){
 var reset = function (){
 	correct = 0;
 	incorrect = 0;
+	tooSlow = 0;
 	current = 0;
 	remaining = questions.length;
 	shuffle(questions);
@@ -69,9 +76,10 @@ var startGame = function (){
 				// store incorrect input
 				++incorrect;
 			}
+			// track current and remaining questions
 			trackQuestion();
 			// NEXT QUESTION
-			nextQuestion();
+			setTimeout(nextQuestion, 1000);
 	 	}
 	 );
 };
@@ -82,6 +90,8 @@ var nextQuestion = function (){
 	$("#questions").empty();
 	// check if more questions
 	if (remaining > 0) {
+		// start timer
+		startTimer();
 		// list questions on page
 		$("#questions").append("<h2>" + questions[current].q + "</h2>");
 		// loop length of answer options
@@ -98,6 +108,8 @@ var nextQuestion = function (){
 	}
 	// if no more questions display info
 	else {
+		// stop timer
+		endTimer();
 		// show info
 		popInfo();
 	}
@@ -106,21 +118,52 @@ var nextQuestion = function (){
 // update questions
 var trackQuestion = function (){
 	// change current question value
-	console.log("current: "+current);
 	++current;
-	console.log("current: "+current);
 	// update remaining questions
-	console.log("remaining: "+remaining);
 	--remaining;
-	console.log("remaining: "+remaining);
 };
+
+// starts timers
+var startTimer = function () {
+	// timer start point
+	seconds = 10;
+	// if timer is not running
+	if (timerOn === false) {
+		// turn timer on
+		timerOn = true;
+		// set interval
+		myInterval = setInterval(countdown, 990);
+	}
+}
+
+// ends timer
+var endTimer = function () {
+	// clear interval
+	clearInterval(myInterval);
+	// mark timer as off
+	timerOn = false;
+}
+
+// function displays countdowns
+var countdown = function () {
+	// display timer
+	$("#info").html("<h2>"+seconds+"</h2>");
+	// decrement seconds
+	seconds--;
+	// if countdown ends
+	if (seconds < 0) {
+		tooSlow++;
+		trackQuestion();
+		nextQuestion();
+	}
+}
 
 // display info upon completion
 var popInfo = function (){
 	// show start button
 	$("#start").show();
 	// make stat var
-	var stats = "<h2>Your Results</h2>"+"<p>Correct: " + correct + "</p>"+"<p>Incorrect: " + incorrect + "</p>"
+	var stats = "<h2>Your Results</h2>"+"<p>Correct: " + correct + "</p>"+"<p>Incorrect: " + incorrect + "</p>"+"<p>Too Slow: " + tooSlow + "</p>"
 	// list results on page
 	$("#info").html(stats);
 };
